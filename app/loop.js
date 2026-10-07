@@ -14,19 +14,24 @@ export function startLoop({ canvas, ctx, world, player, state, renderer, dragAPI
     let lastTs = performance.now();
     let yearAccum = 0;
 
-    function frame(ts) {
-        const dt = Math.min(100, ts - lastTs);
-        lastTs = ts;
+  function frame(ts) {
+    const dt = Math.min(100, ts - lastTs);
+    lastTs = ts;
 
-        yearAccum += dt;
-        const need = 33 * 1000;
-        if (yearAccum >= need) {
-            yearAccum -= need;
-            world.tickUserTime(player, true);
-        }
+    yearAccum += dt;
+    const need = 33 * 1000;
+    if (yearAccum >= need) {
+        yearAccum -= need;
+        world.tickUserTime(player, true);
+    }
 
-        updateHits();
-        renderer.clear();
+    // Обновляем переход
+    if (state.transition) {
+        state.transition.update(dt);
+    }
+
+    updateHits();
+    renderer.clear();
 
         const viewport = { width: canvas.clientWidth, height: canvas.clientHeight };
         const node = player.currentNode;
@@ -116,8 +121,17 @@ export function startLoop({ canvas, ctx, world, player, state, renderer, dragAPI
         renderer.drawStatus(state.statusText, viewport);
 
         // Тащим фигуру — поверх
+                // Тащим фигуру — поверх
         if (drag.active && drag.figure) {
             renderer.drawFigure(drag.figure.shape, drag.x, drag.y, 22, state.currentWorldSpec);
+        }
+
+        // Переход — поверх всего
+        if (state.transition) {
+            renderer.drawTransition(state.transition, {
+                backgroundColor: '#000000',
+                svg: null,
+            });
         }
 
         renderer.flush();
