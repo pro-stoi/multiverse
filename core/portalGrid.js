@@ -1,13 +1,10 @@
 // multiverse/core/portalGrid.js
 //
 // Карта порталов в параллель.
-// Сетка W × H. Блоки SIZE × SIZE по диагонали.
-// В каждом блоке — по одной цифре в строке и столбце (ладья-задача).
-// Наличие цифры в (t, branch) = наличие портала в узле (ветка = branch, t = t).
+// Одна эпоха = 10 веток × 10 узлов. Внутри эпохи — ладья 10 × 10.
+// Порталы ведут ВНУТРИ своей эпохи.
 
-const W = 100;         // ось t
-const H = 100;         // ось ветки
-const SIZE = 10;       // размер блока
+const ERA_SIZE = 10;   // 10 лет в эпохе
 
 function makeRng(seed) {
     let a = seed >>> 0;
@@ -30,36 +27,60 @@ function shuffled(n, rnd) {
 }
 
 export class PortalGrid {
-    constructor(seed) {
-        this.map = new Map();     // "t:branch" → true
+    constructor(seed, totalEras = 100) {
+        this.totalEras = totalEras;
+        this.plusMap  = new Map();   // "t:branch" → true (t >= 0)
+        this.minusMap = new Map();   // "t:branch" → true (t < 0)
         this._build(seed);
     }
 
     _build(seed) {
-        const rnd = makeRng(seed ^ 0xA5B6C7);
+        // Плюс: эпохи 0..totalEras-1
+        for (let era = 0; era < this.totalEras; era++) {
+            this._buildEra(seed, era, 1);
+        }
+        // Минус: эпохи -1..-totalEras
+        for (let era = 0; era < this.totalEras; era++) {
+            this._buildEra(seed, era, -1);
+        }
+    }
 
-        for (let i = 0; i * SIZE < W && i * SIZE < H; i++) {
-            const x0 = i * SIZE;   // по t
-            const y0 = i * SIZE;   // по branch
+    _buildEra(seed, eraIndex, sign) {
+        // Диапазон узлов и веток эпохи
+        // sign = +1: t = era*10 .. era*10+9, branch = era*10 .. era*10+9
+        // sign = -1: t = -1-era*10 .. -10-era*10 (т.е. -10..-1 для era=0)
+        //            branch = era*10 .. era*10+9
 
-            const colForRow = shuffled(SIZE, rnd);
+        const rnd = makeRng(
+            (seed ^ (0xE0000 + eraIndex * 7777 + (sign > 0 ? 0x10000 : 0))) >>> 0
+        );
+        const colForRow = shuffled(ERA_SIZE, rnd);
 
-            for (let r = 0; r < SIZE; r++) {
-                const c = colForRow[r];
-                const t = x0 + c;
-                const branch = y0 + r;
-                this.map.set(t + ':' + branch, true);
+        const branchStart = eraIndex * ERA_SIZE;
+
+        for (let row = 0; row < ERA_SIZE; row++) {
+            const branch = branchStart + row;
+            const tOffset = colForRow[row];
+
+            let t;
+            if (sign > 0) {
+                t = eraIndex * ERA_SIZE + tOffset;
+            } else {
+                t = -(eraIndex * ERA_SIZE + tOffset) - 1;
             }
+
+            const key = t + ':' + branch;
+            if (sign > 0) this.plusMap.set(key, true);
+            else          this.minusMap.set(key, true);
         }
     }
 
     has(branchId, t) {
-        if (t < 0 || t >= W) return false;
-        if (branchId < 0 || branchId >= H) return false;
-        return this.map.has(t + ':' + branchId);
+        if (t >= 0) return this.plusMap.has(t + ':' + branchId);
+        else        return this.minusMap.has(t + ':' + branchId);
     }
 
     count() {
-        return this.map.size;
+        return this.plusMap.size + this.minusMap.size;
     }
 }
