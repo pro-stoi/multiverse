@@ -11,15 +11,13 @@ import { PortalGrid } from './portalGrid.js';
 import { CONFIG } from '../config.js';
 
 export class World {
-    constructor(seed) {
-        
-        
-        
-        
+    constructor(seed, totalEras = 10) {
+    this.totalEras = totalEras;
+    this.portalGrid = new PortalGrid(seed, totalEras);
         
         this.forecastCharges = [];
         this.seed = seed;
-this.portalGrid = new PortalGrid(seed);
+
         
         // branchId -> Map(t -> Node)
         this.allBranches = new Map();
