@@ -34,7 +34,7 @@ import { startLoop } from './app/loop.js';
     resize();
 
     // --- core ---
-    const world = new World(CONFIG.worldSeed);
+    const world = new World(CONFIG.worldSeed, 10);
     const player = new Player();
     const hits = new Hits();
     const state = new GameState(CONFIG.worldSeed);
