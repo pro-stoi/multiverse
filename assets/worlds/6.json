@@ -1,0 +1,44 @@
+{
+    "id": 6,
+    "name": "Forge — кузница",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#1a0a08",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><circle cx='0' cy='0' r='120' fill='#4a2010' opacity='0.4'/><circle cx='0' cy='0' r='95' fill='#6a3020' opacity='0.5'/><circle cx='0' cy='0' r='70' fill='#8a4020' opacity='0.5'/><circle cx='0' cy='0' r='45' fill='#c06030' opacity='0.6'/><circle cx='0' cy='0' r='25' fill='#ffa060' opacity='0.8'/><circle cx='0' cy='0' r='10' fill='#ffe0a0'/></svg>",
+
+        "portalClosed":       "<svg><rect x='-26' y='-16' width='52' height='32' rx='4' fill='#2a1008' stroke='#a06030' stroke-width='1.5'/></svg>",
+        "portalOpenPast":     "<svg><rect x='-26' y='-16' width='52' height='32' rx='4' fill='#2a1008' stroke='#80d0ff' stroke-width='2.5'/></svg>",
+        "portalOpenFuture":   "<svg><rect x='-26' y='-16' width='52' height='32' rx='4' fill='#2a1008' stroke='#ffa060' stroke-width='2.5'/></svg>",
+        "portalOpenParallel": "<svg><rect x='-26' y='-16' width='52' height='32' rx='4' fill='#2a1008' stroke='#c090ff' stroke-width='2.5'/></svg>",
+        "portalOpenAnomaly":  "<svg><rect x='-26' y='-16' width='52' height='32' rx='4' fill='#3a1008' stroke='#ff4060' stroke-width='2.5'/></svg>",
+
+        "cellEmpty":  "<svg><rect x='-13' y='-13' width='26' height='26' rx='3' fill='#1a0a08' stroke='#a06030' stroke-width='1.5'/></svg>",
+        "cellFilled": "<svg><rect x='-13' y='-13' width='26' height='26' rx='3' fill='#2a1810' stroke='#ffa060' stroke-width='2'/></svg>",
+
+        "figureCircle":     "<svg><rect x='-3' y='-14' width='6' height='28' rx='2' fill='#a06040' stroke='#603020' stroke-width='1'/><rect x='-8' y='-14' width='16' height='8' rx='2' fill='#c08050' stroke='#603020' stroke-width='1'/></svg>",
+
+        "figureDiamond":    "<svg><circle cx='0' cy='-8' r='6' fill='none' stroke='#d0a040' stroke-width='2.5'/><rect x='-2' y='-2' width='4' height='16' rx='1' fill='#d0a040'/><rect x='-4' y='10' width='8' height='4' fill='#d0a040'/><rect x='-3' y='14' width='6' height='3' fill='#d0a040'/></svg>",
+
+        "figureSquare":     "<svg><path d='M 0,-14 L 2,-2 L 14,0 L 2,2 L 0,14 L -2,2 L -14,0 L -2,-2 Z' fill='#c0c0d0' stroke='#606070' stroke-width='1.5'/></svg>",
+
+        "figureTriangle":   "<svg><rect x='-2' y='-14' width='4' height='22' rx='1' fill='#8a5030'/><path d='M -12,-14 L 12,-14 L 8,-8 L -8,-8 Z' fill='#c0c0d0' stroke='#606070' stroke-width='1.5'/></svg>",
+
+        "figurePolyhedron": "<svg><path d='M 0,-14 L 10,-8 L 8,2 L -8,2 L -10,-8 Z' fill='#a06030' stroke='#603020' stroke-width='1.5'/><circle cx='0' cy='-4' r='2' fill='#ffe0a0'/><line x1='0' y1='2' x2='0' y2='12' stroke='#a06030' stroke-width='2'/></svg>",
+
+        "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#ffa060' stroke-width='2.5'/><circle cx='0' cy='0' r='18' fill='#2a1008'/></svg>"
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}

@@ -1,0 +1,4 @@
+{
+  "empty":  "<svg><path d='M -14,-4 Q -15,10 -10,14 L 10,14 Q 15,10 14,-4 Z' fill='#2a1e0c' stroke='#6a5028' stroke-width='1.5'/><ellipse cx='0' cy='-4' rx='14' ry='3' fill='#1a1208' stroke='#6a5028' stroke-width='1.5'/><ellipse cx='0' cy='-4' rx='10' ry='2' fill='#0a0602' opacity='0.8'/><circle cx='-3' cy='2' r='1' fill='#4a3820' opacity='0.5'/></svg>",
+  "filled": "<svg><path d='M -14,-4 Q -15,10 -10,14 L 10,14 Q 15,10 14,-4 Z' fill='#2a1e0c' stroke='#a08040' stroke-width='2'/><ellipse cx='0' cy='-4' rx='14' ry='3' fill='#1a1208' stroke='#a08040' stroke-width='2'/><ellipse cx='0' cy='-4' rx='11' ry='2.2' fill='#0a0602' opacity='0.9'/><ellipse cx='-3' cy='-4' rx='4' ry='1' fill='#2a1e0c' opacity='0.8'/><circle cx='4' cy='-4' r='1.5' fill='#d4b878' opacity='0.8'/><circle cx='0' cy='-6' r='1' fill='#f0e0b0' opacity='0.9'/></svg>"
+}

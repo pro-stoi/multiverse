@@ -1,0 +1,40 @@
+{
+    "id": 2,
+    "name": "Echo — эхо",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#0a0612",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><circle cx='0' cy='0' r='120' fill='#1a0e28' opacity='0.4'/><circle cx='0' cy='0' r='90' fill='#2a1840' opacity='0.5'/><circle cx='0' cy='0' r='60' fill='#1a0e28' opacity='0.7'/><circle cx='0' cy='0' r='38' fill='#3a2060' opacity='0.6'/><circle cx='0' cy='0' r='22' fill='#8a70d0' opacity='0.7'/><circle cx='0' cy='0' r='10' fill='#e0d0ff' opacity='0.95'/><circle cx='0' cy='0' r='80' fill='none' stroke='#a090e0' stroke-width='0.8' opacity='0.35'/><circle cx='0' cy='0' r='100' fill='none' stroke='#a090e0' stroke-width='0.6' opacity='0.25'/></svg>",
+
+        "portalClosed":       "<svg><circle cx='0' cy='0' r='30' fill='#1a1028' opacity='0.6'/><circle cx='0' cy='0' r='22' fill='#2a1840' opacity='0.7'/><circle cx='0' cy='0' r='14' fill='#0a0612'/></svg>",
+        "portalOpenPast":     "<svg><circle cx='0' cy='0' r='34' fill='#8060c0' opacity='0.25'/><circle cx='0' cy='0' r='26' fill='#1a1028' opacity='0.85'/><circle cx='0' cy='0' r='16' fill='#a080e0' opacity='0.7'/><circle cx='0' cy='0' r='7' fill='#e0d0ff'/></svg>",
+        "portalOpenFuture":   "<svg><circle cx='0' cy='0' r='34' fill='#6060a0' opacity='0.25'/><circle cx='0' cy='0' r='26' fill='#101828' opacity='0.85'/><circle cx='0' cy='0' r='16' fill='#a0b0e0' opacity='0.7'/><circle cx='0' cy='0' r='7' fill='#e8f0ff'/></svg>",
+        "portalOpenParallel": "<svg><circle cx='0' cy='0' r='34' fill='#7040c0' opacity='0.25'/><circle cx='0' cy='0' r='26' fill='#1a0838' opacity='0.85'/><circle cx='0' cy='0' r='16' fill='#b080ff' opacity='0.7'/><circle cx='0' cy='0' r='7' fill='#f0e0ff'/></svg>",
+        "portalOpenAnomaly":  "<svg><circle cx='0' cy='0' r='36' fill='#a040d0' opacity='0.25'/><circle cx='0' cy='0' r='26' fill='#300840' opacity='0.9'/><circle cx='0' cy='0' r='18' fill='#e080ff' opacity='0.75'/><circle cx='0' cy='0' r='9' fill='#ffffff'/></svg>",
+
+        "cellEmpty":  "<svg><path d='M -14,-8 Q -16,10 -10,14 L 10,14 Q 16,10 14,-8 Z' fill='#1a1028' stroke='#4a3868' stroke-width='1.5'/></svg>",
+        "cellFilled": "<svg><path d='M -14,-8 Q -16,10 -10,14 L 10,14 Q 16,10 14,-8 Z' fill='#1a1028' stroke='#a090e0' stroke-width='2'/></svg>",
+
+        "figureCircle":     "<svg><circle cx='0' cy='0' r='15' fill='#2a1840' opacity='0.9'/><circle cx='0' cy='0' r='9' fill='#a080e0' opacity='0.7'/><circle cx='0' cy='0' r='4' fill='#e0d0ff'/></svg>",
+        "figureDiamond":    "<svg><polygon points='0,-16 16,0 0,16 -16,0' fill='#2a1840' opacity='0.9'/><polygon points='0,-10 10,0 0,10 -10,0' fill='#a080e0' opacity='0.7'/><circle cx='0' cy='0' r='3' fill='#f0e0ff'/></svg>",
+        "figureSquare":     "<svg><rect x='-12' y='-12' width='24' height='24' rx='3' fill='#2a1840' opacity='0.9'/><rect x='-8' y='-8' width='16' height='16' rx='2' fill='#6040a0' opacity='0.5'/><circle cx='0' cy='0' r='3' fill='#f0e0ff'/></svg>",
+        "figureTriangle":   "<svg><polygon points='0,-16 13,10 -13,10' fill='#2a1840' opacity='0.9'/><polygon points='0,-10 8,6 -8,6' fill='#a080e0' opacity='0.7'/><circle cx='0' cy='2' r='3' fill='#f0e0ff'/></svg>",
+        "figurePolyhedron": "<svg><polygon points='0,-14 13,-4 8,12 -8,12 -13,-4' fill='#2a1840' opacity='0.9'/><polygon points='0,-8 7,-2 4,7 -4,7 -7,-2' fill='#a080e0' opacity='0.7'/><circle cx='0' cy='-4' r='2' fill='#f0e0ff'/></svg>",
+
+        "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#a090e0' stroke-width='2.5'/><circle cx='0' cy='0' r='18' fill='#1a1028'/></svg>"
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["DIAMOND", "SQUARE"]
+    }
+}

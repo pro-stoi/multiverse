@@ -1,0 +1,40 @@
+{
+    "id": 0,
+    "name": "Default — водоворот",
+    "era": { "from": 0, "to": 9 },
+    "background": "#020208",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><circle cx='0' cy='0' r='130' fill='#0a1430' opacity='0.3'/><circle cx='0' cy='0' r='100' fill='#102050' opacity='0.4'/><circle cx='0' cy='0' r='70' fill='#1a3070' opacity='0.5'/><circle cx='0' cy='0' r='45' fill='#2a50a0' opacity='0.6'/><circle cx='0' cy='0' r='25' fill='#5080d0' opacity='0.8'/><circle cx='0' cy='0' r='12' fill='#90c0ff'/><circle cx='0' cy='0' r='5' fill='#ffffff'/></svg>",
+
+        "portalClosed":       "<svg><circle cx='0' cy='0' r='28' fill='none' stroke='#5a6480' stroke-width='1.5'/></svg>",
+        "portalOpenPast":     "<svg><circle cx='0' cy='0' r='28' fill='none' stroke='#5ab4ff' stroke-width='2.5'/></svg>",
+        "portalOpenFuture":   "<svg><circle cx='0' cy='0' r='28' fill='none' stroke='#ffaa5a' stroke-width='2.5'/></svg>",
+        "portalOpenParallel": "<svg><circle cx='0' cy='0' r='28' fill='none' stroke='#a08cff' stroke-width='2.5'/></svg>",
+        "portalOpenAnomaly":  "<svg><circle cx='0' cy='0' r='28' fill='none' stroke='#c878ff' stroke-width='2.5'/></svg>",
+
+        "cellEmpty":  "<svg><circle cx='0' cy='0' r='13' fill='#283250' stroke='#3a4a70' stroke-width='1'/></svg>",
+        "cellFilled": "<svg><circle cx='0' cy='0' r='13' fill='#3a4a70' stroke='#5a88d0' stroke-width='1'/></svg>",
+
+        "figureCircle":     "<svg><circle cx='0' cy='0' r='18' fill='#ffffff'/></svg>",
+        "figureDiamond":    "<svg><path d='M 0 -18 L 18 0 L 0 18 L -18 0 Z' fill='#ffffff'/></svg>",
+        "figureSquare":     "<svg><rect x='-16' y='-16' width='32' height='32' fill='#ffffff'/></svg>",
+        "figureTriangle":   "<svg><path d='M 0 -18 L 16 14 L -16 14 Z' fill='#ffffff'/></svg>",
+        "figurePolyhedron": "<svg><path d='M 0 -18 L 17 -5 L 11 15 L -11 15 L -17 -5 Z' fill='#ffffff'/></svg>",
+
+        "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#ffc85a' stroke-width='2.5'/><circle cx='0' cy='0' r='18' fill='#1e1a0e'/></svg>"
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}

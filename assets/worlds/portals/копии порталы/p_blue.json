@@ -1,0 +1,7 @@
+{
+  "closed":        "<svg><circle cx='0' cy='0' r='28' fill='#0a1a2a' stroke='#4a90d0' stroke-width='2'/></svg>",
+  "open_past":     "<svg><circle cx='0' cy='0' r='36' fill='#00d4ff' opacity='0.35'/><circle cx='0' cy='0' r='28' fill='#001828' stroke='#00d4ff' stroke-width='3'/></svg>",
+  "open_future":   "<svg><circle cx='0' cy='0' r='36' fill='#80e0ff' opacity='0.35'/><circle cx='0' cy='0' r='28' fill='#002838' stroke='#80e0ff' stroke-width='3'/></svg>",
+  "open_parallel": "<svg><circle cx='0' cy='0' r='36' fill='#a080ff' opacity='0.35'/><circle cx='0' cy='0' r='28' fill='#1a1030' stroke='#a080ff' stroke-width='3'/></svg>",
+  "open_anomaly":  "<svg><circle cx='0' cy='0' r='36' fill='#ff80d0' opacity='0.35'/><circle cx='0' cy='0' r='28' fill='#301020' stroke='#ff80d0' stroke-width='3'/></svg>"
+}

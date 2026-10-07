@@ -1,0 +1,4 @@
+{
+  "background": "#0a1a10",
+  "svg": "<svg><polygon points='0,-100 87,-50 87,50 0,100 -87,50 -87,-50' fill='#1a3a20' stroke='#50c878' stroke-width='3'/><polygon points='0,-60 52,-30 52,30 0,60 -52,30 -52,-30' fill='#50c878' opacity='0.4'/></svg>"
+}

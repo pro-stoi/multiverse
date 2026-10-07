@@ -1,0 +1,4 @@
+{
+  "empty":  "<svg><circle cx='0' cy='0' r='15' fill='#1a1e2a' opacity='0.5'/><circle cx='0' cy='0' r='12' fill='#05060a' opacity='0.7'/></svg>",
+  "filled": "<svg><circle cx='0' cy='0' r='16' fill='#6080c0' opacity='0.25'/><circle cx='0' cy='0' r='13' fill='#1a2440' opacity='0.8'/><circle cx='0' cy='0' r='6' fill='#80a0e0' opacity='0.6'/><circle cx='-4' cy='-4' r='2' fill='#ffffff' opacity='0.7'/></svg>"
+}

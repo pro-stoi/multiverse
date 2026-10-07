@@ -1,0 +1,40 @@
+{
+    "id": 1,
+    "name": "Archive — старый архив",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#1a1208",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><circle cx='0' cy='0' r='120' fill='#3a2a14' opacity='0.35'/><circle cx='0' cy='0' r='95' fill='#4a3820' opacity='0.4'/><circle cx='0' cy='0' r='70' fill='#3a2a14' opacity='0.5'/><circle cx='0' cy='0' r='45' fill='#5a4428' opacity='0.5'/><circle cx='0' cy='0' r='25' fill='#8a7040' opacity='0.7'/><circle cx='0' cy='0' r='12' fill='#d4b878' opacity='0.9'/><circle cx='0' cy='0' r='5' fill='#f0e0b0'/></svg>",
+
+        "portalClosed":       "<svg><rect x='-24' y='-12' width='48' height='24' rx='4' fill='#3a2a14' stroke='#7a6038' stroke-width='1.5'/></svg>",
+        "portalOpenPast":     "<svg><rect x='-26' y='-18' width='52' height='36' rx='4' fill='#4a3820' stroke='#d4b878' stroke-width='2'/></svg>",
+        "portalOpenFuture":   "<svg><rect x='-26' y='-18' width='52' height='36' rx='4' fill='#4a3a14' stroke='#f0d090' stroke-width='2'/></svg>",
+        "portalOpenParallel": "<svg><rect x='-26' y='-18' width='52' height='36' rx='4' fill='#3a2018' stroke='#c09060' stroke-width='2'/></svg>",
+        "portalOpenAnomaly":  "<svg><rect x='-26' y='-18' width='52' height='36' rx='4' fill='#4a2818' stroke='#ffb060' stroke-width='2.5'/></svg>",
+
+        "cellEmpty":  "<svg><path d='M -14,-4 Q -15,10 -10,14 L 10,14 Q 15,10 14,-4 Z' fill='#2a1e0c' stroke='#6a5028' stroke-width='1.5'/></svg>",
+        "cellFilled": "<svg><path d='M -14,-4 Q -15,10 -10,14 L 10,14 Q 15,10 14,-4 Z' fill='#2a1e0c' stroke='#a08040' stroke-width='2'/></svg>",
+
+        "figureCircle":     "<svg><circle cx='0' cy='0' r='14' fill='#4a3820' stroke='#d4b878' stroke-width='1.5'/><circle cx='0' cy='0' r='5' fill='#d4b878'/></svg>",
+        "figureDiamond":    "<svg><polygon points='0,-14 13,0 0,14 -13,0' fill='#4a3820' stroke='#d4b878' stroke-width='1.5'/><circle cx='0' cy='0' r='2' fill='#f0e0b0'/></svg>",
+        "figureSquare":     "<svg><rect x='-11' y='-11' width='22' height='22' rx='2' fill='#4a3820' stroke='#d4b878' stroke-width='1.5'/></svg>",
+        "figureTriangle":   "<svg><polygon points='0,-14 12,9 -12,9' fill='#4a3820' stroke='#d4b878' stroke-width='1.5'/></svg>",
+        "figurePolyhedron": "<svg><polygon points='0,-14 13,-4 8,12 -8,12 -13,-4' fill='#4a3820' stroke='#d4b878' stroke-width='1.5'/></svg>",
+
+        "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#d4b878' stroke-width='2.5'/><circle cx='0' cy='0' r='18' fill='#2a1e0c'/></svg>"
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}

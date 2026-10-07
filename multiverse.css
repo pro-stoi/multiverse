@@ -1,0 +1,42 @@
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #05060d;
+    overflow: hidden;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    color: #dce6ff;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameFrame {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    height: 100vh;
+    max-width: 100vw;
+    background: #0a0a1e;
+    border: 2px solid #2a3050;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(80, 120, 200, 0.25);
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+@media (max-width: 500px) {
+    #gameFrame { border-radius: 0; border: none; box-shadow: none; }
+}

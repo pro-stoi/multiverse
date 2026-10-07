@@ -1,0 +1,7 @@
+{
+  "closed":        "<svg><rect x='-28' y='-28' width='56' height='56' fill='#1a0808' stroke='#a04040' stroke-width='2'/></svg>",
+  "open_past":     "<svg><rect x='-34' y='-34' width='68' height='68' fill='#ff3030' opacity='0.35'/><rect x='-28' y='-28' width='56' height='56' fill='#300808' stroke='#ff3030' stroke-width='3'/></svg>",
+  "open_future":   "<svg><polygon points='0,-36 36,0 0,36 -36,0' fill='#ff8020' opacity='0.35'/><polygon points='0,-28 28,0 0,28 -28,0' fill='#301008' stroke='#ff8020' stroke-width='3'/></svg>",
+  "open_parallel": "<svg><polygon points='0,-36 30,-18 30,18 0,36 -30,18 -30,-18' fill='#ff20a0' opacity='0.35'/><polygon points='0,-28 24,-14 24,14 0,28 -24,14 -24,-14' fill='#300818' stroke='#ff20a0' stroke-width='3'/></svg>",
+  "open_anomaly":  "<svg><circle cx='0' cy='0' r='36' fill='#ff0080' opacity='0.4'/><circle cx='0' cy='0' r='28' fill='#300010' stroke='#ff0080' stroke-width='4'/></svg>"
+}

@@ -1,0 +1,4 @@
+{
+  "empty":  "<svg><path d='M -14,-8 Q -16,10 -10,14 L 10,14 Q 16,10 14,-8 Z' fill='#1a1028' stroke='#4a3868' stroke-width='1.5'/><ellipse cx='0' cy='-8' rx='14' ry='3' fill='#0a0612' stroke='#4a3868' stroke-width='1.5'/><ellipse cx='0' cy='-8' rx='10' ry='2' fill='#1a1028' opacity='0.7'/><circle cx='-4' cy='0' r='1.5' fill='#6a5a90' opacity='0.5'/><circle cx='3' cy='4' r='1' fill='#6a5a90' opacity='0.4'/></svg>",
+  "filled": "<svg><path d='M -14,-8 Q -16,10 -10,14 L 10,14 Q 16,10 14,-8 Z' fill='#1a1028' stroke='#a090e0' stroke-width='2'/><ellipse cx='0' cy='-8' rx='14' ry='3' fill='#2a1840' stroke='#a090e0' stroke-width='2'/><ellipse cx='0' cy='-8' rx='10' ry='2' fill='#8050d0' opacity='0.6'/><ellipse cx='0' cy='-9' rx='7' ry='1.5' fill='#c0a0ff' opacity='0.7'/><circle cx='0' cy='-9' r='2' fill='#f0e0ff'/><circle cx='-8' cy='-14' r='1.5' fill='#c0a0ff' opacity='0.6'/><circle cx='8' cy='-16' r='1' fill='#c0a0ff' opacity='0.5'/></svg>"
+}
