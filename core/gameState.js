@@ -14,6 +14,9 @@ export class GameState {
         this.dragging = null;           // фигура в руке (если drag-mode)
         this.dragSource = 'NONE';
 
+        this.panX = 0;
+this.panY = 0;
+        
         this.zoom = 1.0;
         this.secondsToNextYear = 20;
 
