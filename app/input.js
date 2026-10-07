@@ -181,48 +181,92 @@ async function maybeSwapWorld() {
     }
 
     // --- слушатели ---
-    canvas.addEventListener('pointerdown', (e) => {
-        const { x, y } = canvasXY(e);
-        downX = x; downY = y;
-        downHit = hits.findAt(x, y);
-    });
+  let panActive = false;
+let panStartX = 0, panStartY = 0;
+let panStartPanX = 0, panStartPanY = 0;
+let panCandidate = false;   // нажатие может стать панорамированием
 
-    canvas.addEventListener('pointermove', (e) => {
-        if (!downHit) return;
-        const { x, y } = canvasXY(e);
-        const dx = x - downX, dy = y - downY;
-        const dist2 = dx * dx + dy * dy;
-        if (!dragThresholdPassed && dist2 > 100) {
-            dragThresholdPassed = true;
-            dragAPI.start(downHit, x, y);
+canvas.addEventListener('pointerdown', (e) => {
+    const { x, y } = canvasXY(e);
+    downX = x; downY = y;
+    downHit = hits.findAt(x, y);
+    panCandidate = false;
+    panActive = false;
+
+    // Если нажатие НЕ на хит (пустое место) — кандидат на панорамирование
+    if (!downHit) {
+        panCandidate = true;
+        panStartX = x;
+        panStartY = y;
+        panStartPanX = state.panX || 0;
+        panStartPanY = state.panY || 0;
+    }
+});
+
+canvas.addEventListener('pointermove', (e) => {
+    const { x, y } = canvasXY(e);
+
+    // Панорамирование
+    if (panCandidate && !panActive) {
+        const dx = x - panStartX;
+        const dy = y - panStartY;
+        if (dx * dx + dy * dy > 100) {   // порог срабатывания
+            panActive = true;
         }
-        if (dragAPI.drag.active) dragAPI.update(x, y);
-    });
+    }
 
-    canvas.addEventListener('pointerup', (e) => {
-        const { x, y } = canvasXY(e);
-        const now = performance.now();
-        const dx = x - downX, dy = y - downY;
-        const moved = (dx * dx + dy * dy) > 100;
+    if (panActive) {
+        state.panX = panStartPanX + (x - panStartX);
+        state.panY = panStartPanY + (y - panStartY);
+        return;
+    }
 
-        if (dragAPI.drag.active) {
-            dragAPI.drop(x, y);
-            dragThresholdPassed = false;
-            downHit = null;
-            return;
-        }
-        dragThresholdPassed = false;
-        if (moved) { downHit = null; return; }
-        handleTap(x, y, now);
+    // Драг фигуры
+    if (!downHit) return;
+    const dx = x - downX, dy = y - downY;
+    const dist2 = dx * dx + dy * dy;
+    if (!dragThresholdPassed && dist2 > 100) {
+        dragThresholdPassed = true;
+        dragAPI.start(downHit, x, y);
+    }
+    if (dragAPI.drag.active) dragAPI.update(x, y);
+});
+
+canvas.addEventListener('pointerup', (e) => {
+    const { x, y } = canvasXY(e);
+    const now = performance.now();
+    const dx = x - downX, dy = y - downY;
+    const moved = (dx * dx + dy * dy) > 100;
+
+    if (panActive) {
+        panActive = false;
+        panCandidate = false;
         downHit = null;
-    });
+        return;
+    }
 
-    canvas.addEventListener('pointercancel', () => {
-        if (dragAPI.drag.active) {
-            dragAPI.returnToSource();
-            dragAPI.end();
-        }
+    panCandidate = false;
+
+    if (dragAPI.drag.active) {
+        dragAPI.drop(x, y);
         dragThresholdPassed = false;
         downHit = null;
-    });
+        return;
+    }
+    dragThresholdPassed = false;
+    if (moved) { downHit = null; return; }
+    handleTap(x, y, now);
+    downHit = null;
+});
+
+canvas.addEventListener('pointercancel', () => {
+    if (dragAPI.drag.active) {
+        dragAPI.returnToSource();
+        dragAPI.end();
+    }
+    panActive = false;
+    panCandidate = false;
+    dragThresholdPassed = false;
+    downHit = null;
+});
    } 
