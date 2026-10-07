@@ -207,50 +207,37 @@ for (const p of node.portals) p.refreshState();
 //  Куда ведёт портал в параллель
 // ===============================================================
 function pickParallelTarget(world, branchId, t, worldSeed) {
-    const era = Math.floor(t / 10);
-    const N = world.N || 100;
+    // Эпоха
+    let era;
+    if (t >= 0) era = Math.floor(t / 10);
+    else        era = Math.floor((-t - 1) / 10);
 
+    // Ветки этой эпохи
+    const branchStart = era * 10;
+    const branchEnd = branchStart + 9;
+
+    // Собираем уже занятые цели в этой эпохе
     const occupied = occupiedBranchesInEra(world, era);
-    occupied.add(branchId);
+    const alreadyFromThis = occupiedTargetsFromBranch(world, branchId);
 
-    const RADIUS = 10;
     const candidates = [];
-
-    for (let offset = -RADIUS; offset <= RADIUS; offset++) {
-        if (offset === 0) continue;
-        const b = branchId + offset;
-
-        // НЕ выходим за пределы 0..N-1
-        if (b < 0) continue;
-        if (b >= N) continue;
-
+    for (let b = branchStart; b <= branchEnd; b++) {
+        if (b === branchId) continue;
         if (occupied.has(b)) continue;
+        if (alreadyFromThis.has(b)) continue;
         candidates.push(b);
     }
 
-    // Если рядом нет свободных — расширяем радиус до ±30
     if (candidates.length === 0) {
-        for (let offset = -30; offset <= 30; offset++) {
-            if (offset === 0) continue;
-            const b = branchId + offset;
-            if (b < 0 || b >= N) continue;
-            if (occupied.has(b)) continue;
-            candidates.push(b);
-        }
-    }
-
-    // Если всё ещё нет — по всей карте
-    if (candidates.length === 0) {
-        for (let b = 0; b < N; b++) {
+        for (let b = branchStart; b <= branchEnd; b++) {
             if (b === branchId) continue;
             if (occupied.has(b)) continue;
             candidates.push(b);
         }
     }
 
-    // Если совсем нет — берём любую, кроме своей
     if (candidates.length === 0) {
-        for (let b = 0; b < N; b++) {
+        for (let b = branchStart; b <= branchEnd; b++) {
             if (b !== branchId) candidates.push(b);
         }
     }
@@ -258,6 +245,24 @@ function pickParallelTarget(world, branchId, t, worldSeed) {
 
     const rng = makeRng(hash32(worldSeed, branchId, t, 0xB01));
     return candidates[Math.floor(rng() * candidates.length)];
+}
+
+// Ветки, в которые УЖЕ ведёт портал из этой ветки (в любой эпохе)
+function occupiedTargetsFromBranch(world, branchId) {
+    const set = new Set();
+    if (!world || !world.allBranches) return set;
+
+    const nodesMap = world.allBranches.get(branchId);
+    if (!nodesMap) return set;
+
+    for (const node of nodesMap.values()) {
+        for (const p of node.portals) {
+            if (p.kind === PortalKind.PARALLEL && p.targetBranch >= 0 && !p.anomalous) {
+                set.add(p.targetBranch);
+            }
+        }
+    }
+    return set;
 }
 
 // Занятые ветки-цели в эпохе
