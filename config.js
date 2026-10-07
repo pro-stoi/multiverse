@@ -230,9 +230,9 @@ debug: {
     logLevel: 'info',
 
     // === ЧИТЫ ДЛЯ ТЕСТА ===
-    cheat_fullInventory: true,   // в начале — по 25 каждой фигуры
-    cheat_allPortalsOpen: true,  // все порталы открыты
-    cheat_noEnergyCost: true,    // прыжки и годы бесплатны
+    cheat_fullInventory: false,   // в начале — по 25 каждой фигуры
+    cheat_allPortalsOpen: false,  // все порталы открыты
+    cheat_noEnergyCost: false,    // прыжки и годы бесплатны
     cheat_showAllPortals: true,  // все порталы известны (без ?)
 },
 };
