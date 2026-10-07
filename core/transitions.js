@@ -7,10 +7,12 @@
 // По завершении 'out' — transition считается done.
 
 export class Transition {
-    constructor(bgSpec, onComplete) {
+    constructor(bgSpec, onComplete, onPhaseInEnd) {
         this.spec = bgSpec || {};
         this.onComplete = onComplete || (() => {});
-
+        this.onPhaseInEnd = onPhaseInEnd || (() => {});
+        
+        
         this.durationIn   = this.spec.durationIn   ?? 400;
         this.durationHold = this.spec.durationHold ?? 200;
         this.durationOut  = this.spec.durationOut  ?? 400;
@@ -21,29 +23,29 @@ export class Transition {
         this.done    = false;
     }
 
-    update(dtMs) {
-        if (this.done) return;
-        this.elapsed += dtMs;
+ update(dtMs) {
+    if (this.done) return;
+    this.elapsed += dtMs;
 
-        if (this.phase === 'in') {
-            if (this.elapsed >= this.durationIn) {
-                this.phase = 'hold';
-                this.elapsed = 0;
-                // Здесь игровая логика может переключить узел
-                // (через onComplete — либо вручную снаружи)
-            }
-        } else if (this.phase === 'hold') {
-            if (this.elapsed >= this.durationHold) {
-                this.phase = 'out';
-                this.elapsed = 0;
-            }
-        } else if (this.phase === 'out') {
-            if (this.elapsed >= this.durationOut) {
-                this.done = true;
-                this.onComplete();
-            }
+    if (this.phase === 'in') {
+        if (this.elapsed >= this.durationIn) {
+            this.phase = 'hold';
+            this.elapsed = 0;
+            // Момент, когда затемнение завершено — можно менять мир
+            this.onPhaseInEnd();
+        }
+    } else if (this.phase === 'hold') {
+        if (this.elapsed >= this.durationHold) {
+            this.phase = 'out';
+            this.elapsed = 0;
+        }
+    } else if (this.phase === 'out') {
+        if (this.elapsed >= this.durationOut) {
+            this.done = true;
+            this.onComplete();
         }
     }
+}
 
     // Полная длительность (для проверки « > 800 мс»)
     totalDuration() {
