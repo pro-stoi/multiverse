@@ -2,7 +2,7 @@
 //
 // Загрузка списка миров и миров по ID.
 
-const BASE = '/assets/worlds';
+const BASE = './assets/worlds';
 const API = '/api/multiverse/worlds/list';
 
 const cache = new Map();
@@ -25,7 +25,26 @@ async function fetchJson(url) {
 // Список ID миров. Кэшируется.
 export async function loadWorldList() {
     if (worldListCache) return worldListCache;
-    const data = await fetchJson(API);
+
+    // 1. Сначала пробуем сервер
+    let data = null;
+    try {
+        const res = await fetch(API);
+        if (res.ok) data = await res.json();
+    } catch (e) {
+        // сервер недоступен — это нормально на GitHub Pages
+    }
+
+    // 2. Если сервер не ответил — читаем index.json
+    if (!data || !Array.isArray(data.worlds)) {
+        try {
+            const res = await fetch(`${BASE}/index.json`);
+            if (res.ok) data = await res.json();
+        } catch (e) {
+            console.warn('[worldAssets] index.json не загружен', e.message);
+        }
+    }
+
     worldListCache = (data && Array.isArray(data.worlds)) ? data.worlds : [];
     return worldListCache;
 }
