@@ -42,6 +42,8 @@ export function startLoop({ canvas, ctx, world, player, state, renderer, dragAPI
 
         const radiusMul = node ? (1 + (node.radius || 2) / 5) * state.zoom : 1;
         const worldRect = state.currentWorldSpec.getWorldRect(viewport, radiusMul);
+worldRect.cx += state.panX || 0;
+worldRect.cy += state.panY || 0;
 
         renderer.drawWorld(worldRect, node, state.currentWorldSpec);
         renderer.drawWorldFill(worldRect, (node.fill || 0) / 100);
