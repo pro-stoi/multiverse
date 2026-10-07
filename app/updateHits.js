@@ -13,6 +13,8 @@ export function updateHits({ hits, world, player, state, canvas }) {
 
     const radiusMul = (1 + (node.radius || 2) / 5) * state.zoom;
     const worldRect = state.currentWorldSpec.getWorldRect(viewport, radiusMul);
+worldRect.cx += state.panX || 0;
+worldRect.cy += state.panY || 0;
 
     // Порталы + ячейки
     for (let pi = 0; pi < node.portals.length; pi++) {
