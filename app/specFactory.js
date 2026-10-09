@@ -4,8 +4,26 @@
 
 import { FALLBACK_SVG } from './fallback.js';
 import { loadWorld, pickWorldId } from '../data/worldAssets.js';
+import { Animation } from '../core/animation.js';
 
 const FIG_KEYS = ['CIRCLE', 'DIAMOND', 'SQUARE', 'TRIANGLE', 'POLYHEDRON'];
+
+// Fallback-ключи, чтобы не падало при отсутствии
+const FALLBACK_SVG_KEYS = {
+    world: FALLBACK_SVG.world,
+    portalClosed: FALLBACK_SVG.portalClosed,
+    portalOpenPast: FALLBACK_SVG.portalOpenPast,
+    portalOpenFuture: FALLBACK_SVG.portalOpenFuture,
+    portalOpenParallel: FALLBACK_SVG.portalOpenParallel,
+    portalOpenAnomaly: FALLBACK_SVG.portalOpenAnomaly,
+    cellEmpty: FALLBACK_SVG.cellEmpty,
+    cellFilled: FALLBACK_SVG.cellFilled,
+    figureCircle: FALLBACK_SVG.figureCircle,
+    figureDiamond: FALLBACK_SVG.figureDiamond,
+    figureSquare: FALLBACK_SVG.figureSquare,
+    figureTriangle: FALLBACK_SVG.figureTriangle,
+    figurePolyhedron: FALLBACK_SVG.figurePolyhedron,
+};
 
 // Из одного JSON строит spec.
 export function makeSpecFromJson(worldJson) {
@@ -13,6 +31,20 @@ export function makeSpecFromJson(worldJson) {
 
     const svg = Object.assign({}, FALLBACK_SVG_KEYS, worldJson.svg);
     const layout = worldJson.layout || {};
+    const animationsRaw = worldJson.animations || {};
+
+    // Кэш анимаций по имени
+    const animCache = new Map();
+
+    function getAnimation(name) {
+        if (!name) return null;
+        if (animCache.has(name)) return animCache.get(name);
+
+        const conf = animationsRaw[name];
+        const anim = conf ? new Animation(conf) : null;
+        animCache.set(name, anim);
+        return anim;
+    }
 
     return {
         id: worldJson.id,
@@ -21,6 +53,8 @@ export function makeSpecFromJson(worldJson) {
         background: worldJson.background || '#020208',
         layout: layout,
         params: worldJson.params || {},
+
+        // -------- SVG --------
 
         getWorldSvg() { return svg.world; },
 
@@ -39,7 +73,6 @@ export function makeSpecFromJson(worldJson) {
         getFigureSvg(shapeIndex) {
             const key = 'figure' + FIG_KEYS[shapeIndex].charAt(0) +
                         FIG_KEYS[shapeIndex].slice(1).toLowerCase();
-            // figureCircle, figureDiamond, ...
             return svg[key] || svg.figureCircle;
         },
 
@@ -47,7 +80,32 @@ export function makeSpecFromJson(worldJson) {
             return svg.exchanger || null;
         },
 
-        // -------- позиции --------
+        // -------- Имена для анимаций --------
+
+        // Имя SVG портала — для поиска анимации.
+        getPortalAnimName(portal) {
+            if (!portal.isOpen()) return 'portalClosed';
+            if (portal.anomalous) return 'portalOpenAnomaly';
+            if (portal.kind === 'PARALLEL') return 'portalOpenParallel';
+            if (portal.kind === 'TIME_PAST') return 'portalOpenPast';
+            return 'portalOpenFuture';
+        },
+
+        getCellAnimName(filled) {
+            return filled ? 'cellFilled' : 'cellEmpty';
+        },
+
+        getFigureAnimName(shapeIndex) {
+            const key = 'figure' + FIG_KEYS[shapeIndex].charAt(0) +
+                        FIG_KEYS[shapeIndex].slice(1).toLowerCase();
+            return key;
+        },
+
+        getAnimation(name) {
+            return getAnimation(name);
+        },
+
+        // -------- Позиции --------
 
         getWorldRect(viewport, radiusMul = 1.0) {
             const w = layout.world || {};
@@ -130,23 +188,6 @@ export function makeSpecFromJson(worldJson) {
         },
     };
 }
-
-// Fallback-ключи, чтобы не падало при отсутствии
-const FALLBACK_SVG_KEYS = {
-    world: FALLBACK_SVG.world,
-    portalClosed: FALLBACK_SVG.portalClosed,
-    portalOpenPast: FALLBACK_SVG.portalOpenPast,
-    portalOpenFuture: FALLBACK_SVG.portalOpenFuture,
-    portalOpenParallel: FALLBACK_SVG.portalOpenParallel,
-    portalOpenAnomaly: FALLBACK_SVG.portalOpenAnomaly,
-    cellEmpty: FALLBACK_SVG.cellEmpty,
-    cellFilled: FALLBACK_SVG.cellFilled,
-    figureCircle: FALLBACK_SVG.figureCircle,
-    figureDiamond: FALLBACK_SVG.figureDiamond,
-    figureSquare: FALLBACK_SVG.figureSquare,
-    figureTriangle: FALLBACK_SVG.figureTriangle,
-    figurePolyhedron: FALLBACK_SVG.figurePolyhedron,
-};
 
 // Загрузить мир по ID.
 export async function loadSpec(id) {
