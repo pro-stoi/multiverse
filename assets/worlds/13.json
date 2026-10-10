@@ -1,0 +1,40 @@
+{
+    "id": 13,
+    "name": "Clockwork — часовой механизм",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#181410",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><circle cx='0' cy='0' r='120' fill='#3a3020' opacity='0.5'/><circle cx='0' cy='0' r='95' fill='#5a4830' opacity='0.6'/><circle cx='0' cy='0' r='70' fill='#8a6840' opacity='0.6'/><circle cx='0' cy='0' r='45' fill='#b09060' opacity='0.7'/><circle cx='0' cy='0' r='25' fill='#e0c080' opacity='0.9'/><circle cx='0' cy='0' r='10' fill='#fff0c0'/><circle cx='0' cy='0' r='95' fill='none' stroke='#e0c080' stroke-width='2' stroke-dasharray='6 4' opacity='0.4'/><circle cx='0' cy='0' r='80' fill='none' stroke='#e0c080' stroke-width='1.5' stroke-dasharray='3 3' opacity='0.3'/></svg>",
+
+        "portalClosed":       "<svg><circle cx='0' cy='0' r='28' fill='none' stroke='#7a6040' stroke-width='2' stroke-dasharray='5 3'/></svg>",
+        "portalOpenPast":     "<svg><circle cx='0' cy='0' r='28' fill='#181410' stroke='#80d0ff' stroke-width='3'/><circle cx='0' cy='0' r='16' fill='none' stroke='#80d0ff' stroke-width='1.5' stroke-dasharray='4 2'/></svg>",
+        "portalOpenFuture":   "<svg><circle cx='0' cy='0' r='28' fill='#181410' stroke='#ffd040' stroke-width='3'/><circle cx='0' cy='0' r='16' fill='none' stroke='#ffd040' stroke-width='1.5' stroke-dasharray='4 2'/></svg>",
+        "portalOpenParallel": "<svg><circle cx='0' cy='0' r='28' fill='#181410' stroke='#c080ff' stroke-width='3'/><circle cx='0' cy='0' r='16' fill='none' stroke='#c080ff' stroke-width='1.5' stroke-dasharray='4 2'/></svg>",
+        "portalOpenAnomaly":  "<svg><circle cx='0' cy='0' r='28' fill='#201810' stroke='#ff4080' stroke-width='3'/><circle cx='0' cy='0' r='16' fill='none' stroke='#ff4080' stroke-width='1.5' stroke-dasharray='4 2'/></svg>",
+
+        "cellEmpty":  "<svg><circle cx='0' cy='0' r='13' fill='#181410' stroke='#7a6040' stroke-width='2' stroke-dasharray='3 2'/></svg>",
+        "cellFilled": "<svg><circle cx='0' cy='0' r='13' fill='#3a3020' stroke='#e0c080' stroke-width='2.5'/><circle cx='0' cy='0' r='4' fill='#fff0c0'/></svg>",
+
+        "figureCircle":     "<svg><circle cx='0' cy='0' r='14' fill='none' stroke='#e0c080' stroke-width='3'/><circle cx='0' cy='0' r='4' fill='#e0c080'/><line x1='0' y1='-14' x2='0' y2='-6' stroke='#e0c080' stroke-width='2'/><line x1='0' y1='0' x2='6' y2='3' stroke='#e0c080' stroke-width='2'/></svg>",
+        "figureDiamond":    "<svg><polygon points='0,-14 12,-2 6,12 -6,12 -12,-2' fill='#8a6840' stroke='#e0c080' stroke-width='1.5'/><circle cx='0' cy='2' r='4' fill='#fff0c0'/><line x1='0' y1='-2' x2='0' y2='6' stroke='#181410' stroke-width='1.5'/></svg>",
+        "figureSquare":     "<svg><rect x='-12' y='-12' width='24' height='24' rx='3' fill='#5a4830' stroke='#e0c080' stroke-width='2'/><circle cx='0' cy='0' r='6' fill='#181410'/><circle cx='0' cy='0' r='2' fill='#e0c080'/><line x1='0' y1='-6' x2='4' y2='-4' stroke='#e0c080' stroke-width='1.5'/></svg>",
+        "figureTriangle":   "<svg><polygon points='0,-14 13,10 -13,10' fill='#5a4830' stroke='#e0c080' stroke-width='1.5'/><circle cx='0' cy='2' r='4' fill='#181410'/><line x1='0' y1='-2' x2='3' y2='4' stroke='#e0c080' stroke-width='1.5'/></svg>",
+        "figurePolyhedron": "<svg><polygon points='0,-14 13,-4 8,12 -8,12 -13,-4' fill='#5a4830' stroke='#e0c080' stroke-width='1.5'/><circle cx='0' cy='0' r='5' fill='#181410'/><circle cx='0' cy='0' r='2' fill='#e0c080'/><line x1='0' y1='-5' x2='3' y2='-3' stroke='#e0c080' stroke-width='1.5'/></svg>",
+
+        "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#e0c080' stroke-width='3' stroke-dasharray='6 3'/><circle cx='0' cy='0' r='18' fill='#181410'/></svg>"
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "id": 12,
+    "name": "Glacier — ледник",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#0a1830",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><circle cx='0' cy='0' r='120' fill='#1a3050' opacity='0.4'/><circle cx='0' cy='0' r='95' fill='#2a4868' opacity='0.5'/><circle cx='0' cy='0' r='70' fill='#3a6890' opacity='0.6'/><circle cx='0' cy='0' r='45' fill='#5a90c0' opacity='0.7'/><circle cx='0' cy='0' r='25' fill='#90d0ff' opacity='0.8'/><circle cx='0' cy='0' r='10' fill='#e0f4ff'/></svg>",
+
+        "portalClosed":       "<svg><polygon points='0,-28 12,-16 16,0 12,16 0,28 -12,16 -16,0 -12,-16' fill='#0a1830' stroke='#5080b0' stroke-width='2'/></svg>",
+        "portalOpenPast":     "<svg><polygon points='0,-28 12,-16 16,0 12,16 0,28 -12,16 -16,0 -12,-16' fill='#0a1830' stroke='#80d0ff' stroke-width='3'/></svg>",
+        "portalOpenFuture":   "<svg><polygon points='0,-28 12,-16 16,0 12,16 0,28 -12,16 -16,0 -12,-16' fill='#0a1830' stroke='#a0e8ff' stroke-width='3'/></svg>",
+        "portalOpenParallel": "<svg><polygon points='0,-28 12,-16 16,0 12,16 0,28 -12,16 -16,0 -12,-16' fill='#0a1830' stroke='#c0a0ff' stroke-width='3'/></svg>",
+        "portalOpenAnomaly":  "<svg><polygon points='0,-28 12,-16 16,0 12,16 0,28 -12,16 -16,0 -12,-16' fill='#181828' stroke='#ff80c0' stroke-width='3'/></svg>",
+
+        "cellEmpty":  "<svg><polygon points='0,-13 9,-6 9,6 0,13 -9,6 -9,-6' fill='#0a1830' stroke='#5080b0' stroke-width='2'/></svg>",
+        "cellFilled": "<svg><polygon points='0,-13 9,-6 9,6 0,13 -9,6 -9,-6' fill='#1a3050' stroke='#90d0ff' stroke-width='2.5'/></svg>",
+
+        "figureCircle":     "<svg><path d='M -10,-10 L 10,-10 L 10,-4 L 14,0 L 10,4 L 10,10 L -10,10 L -10,4 L -14,0 L -10,-4 Z' fill='#a0e0ff' stroke='#4080a0' stroke-width='1.5'/><circle cx='-3' cy='-3' r='3' fill='#ffffff' opacity='0.8'/></svg>",
+        "figureDiamond":    "<svg><polygon points='0,-15 10,-4 10,4 0,15 -10,4 -10,-4' fill='#c0f0ff' stroke='#5090b0' stroke-width='1.5'/><polygon points='0,-8 4,-2 4,2 0,8 -4,2 -4,-2' fill='#ffffff' opacity='0.7'/></svg>",
+        "figureSquare":     "<svg><polygon points='0,-15 13,-8 13,0 0,8 -13,0 -13,-8' fill='#80c0e0' stroke='#306080' stroke-width='1.5'/><polygon points='0,-8 6,-4 6,0 0,4 -6,0 -6,-4' fill='#e0f4ff' opacity='0.7'/></svg>",
+        "figureTriangle":   "<svg><polygon points='0,-15 12,-4 14,6 6,14 -6,14 -14,6 -12,-4' fill='#e0f4ff' stroke='#5080a0' stroke-width='1.5'/><polygon points='0,-8 5,-2 6,4 2,8 -2,8 -6,4 -5,-2' fill='#ffffff' opacity='0.8'/></svg>",
+        "figurePolyhedron": "<svg><polygon points='0,-14 8,-8 8,0 4,8 -4,8 -8,0 -8,-8' fill='#6090c0' stroke='#204060' stroke-width='1.5'/><polygon points='0,-8 4,-4 4,0 2,4 -2,4 -4,0 -4,-4' fill='#c0e8ff' opacity='0.8'/></svg>",
+
+        "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#90d0ff' stroke-width='3'/><circle cx='0' cy='0' r='18' fill='#0a1830'/></svg>"
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}

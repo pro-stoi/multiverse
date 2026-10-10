@@ -1,0 +1,115 @@
+{
+    "id": 3,
+    "name": "Star — звезда",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#0f0a1a",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><path d='M 0,-100 L 15,-15 L 100,0 L 15,15 L 0,100 L -15,15 L -100,0 L -15,-15 Z' fill='#3a1e5a' stroke='#c8a0ff' stroke-width='3'/><circle cx='0' cy='0' r='25' fill='#8a60ff' opacity='0.7'/><circle cx='0' cy='0' r='10' fill='#e0d0ff'/></svg>",
+
+        "portalClosed":       "<svg><polygon points='0,-28 8,-8 28,0 8,8 0,28 -8,8 -28,0 -8,-8' fill='#1a1030' stroke='#5a4880' stroke-width='1.5'/></svg>",
+        "portalOpenPast":     "<svg><polygon points='0,-28 8,-8 28,0 8,8 0,28 -8,8 -28,0 -8,-8' fill='#1a1030' stroke='#80d0ff' stroke-width='2.5'/></svg>",
+        "portalOpenFuture":   "<svg><polygon points='0,-28 8,-8 28,0 8,8 0,28 -8,8 -28,0 -8,-8' fill='#1a1030' stroke='#ffc060' stroke-width='2.5'/></svg>",
+        "portalOpenParallel": "<svg><polygon points='0,-28 8,-8 28,0 8,8 0,28 -8,8 -28,0 -8,-8' fill='#1a1030' stroke='#c080ff' stroke-width='2.5'/></svg>",
+        "portalOpenAnomaly":  "<svg><polygon points='0,-28 8,-8 28,0 8,8 0,28 -8,8 -28,0 -8,-8' fill='#1a1030' stroke='#ff4060' stroke-width='2.5'/></svg>",
+
+        "cellEmpty":  "<svg><polygon points='0,-13 5,-5 13,0 5,5 0,13 -5,5 -13,0 -5,-5' fill='#1a1030' stroke='#5a4880' stroke-width='1'/></svg>",
+        "cellFilled": "<svg><polygon points='0,-13 5,-5 13,0 5,5 0,13 -5,5 -13,0 -5,-5' fill='#3a1e5a' stroke='#c8a0ff' stroke-width='1.5'/></svg>",
+
+        "figureCircle":     "<svg><circle cx='0' cy='0' r='15' fill='#3a1e5a' stroke='#c8a0ff' stroke-width='1.5'/><circle cx='0' cy='0' r='5' fill='#e0d0ff'/></svg>",
+        "figureDiamond":    "<svg><polygon points='0,-15 15,0 0,15 -15,0' fill='#3a1e5a' stroke='#c8a0ff' stroke-width='1.5'/><circle cx='0' cy='0' r='3' fill='#e0d0ff'/></svg>",
+        "figureSquare":     "<svg><rect x='-12' y='-12' width='24' height='24' rx='3' fill='#3a1e5a' stroke='#c8a0ff' stroke-width='1.5'/></svg>",
+        "figureTriangle":   "<svg><polygon points='0,-15 13,10 -13,10' fill='#3a1e5a' stroke='#c8a0ff' stroke-width='1.5'/></svg>",
+        "figurePolyhedron": "<svg><polygon points='0,-15 13,-4 8,12 -8,12 -13,-4' fill='#3a1e5a' stroke='#c8a0ff' stroke-width='1.5'/></svg>",
+
+        "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#c8a0ff' stroke-width='2.5'/><circle cx='0' cy='0' r='18' fill='#1a1030'/></svg>"
+    },
+
+    "animations": {
+        "world": {
+            "rotation": { "speed": 0.08 },
+            "pulse":    { "speed": 0.2, "amplitude": 0.03 },
+            "js":       "const t = Date.now()/1000; ctx.globalAlpha = 0.85 + Math.sin(t*1.5)*0.15;"
+        },
+
+        "portalClosed": {
+            "pulse": { "speed": 0.5, "amplitude": 0.02 }
+        },
+
+        "portalOpenPast": {
+            "rotation": { "speed": 0.3 },
+            "pulse":    { "speed": 0.8, "amplitude": 0.05 },
+            "js":       "const t = Date.now()/800; ctx.globalAlpha = 0.7 + Math.sin(t*1.8)*0.3;"
+        },
+
+        "portalOpenFuture": {
+            "rotation": { "speed": -0.25 },
+            "pulse":    { "speed": 0.7, "amplitude": 0.04 }
+        },
+
+        "portalOpenParallel": {
+            "rotation": { "speed": 0.6 },
+            "pulse":    { "speed": 1.3, "amplitude": 0.07 },
+            "js":       "const t = Date.now()/500; ctx.scale(1 + Math.sin(t*2)*0.05, 1 - Math.sin(t*2)*0.05);"
+        },
+
+        "portalOpenAnomaly": {
+            "rotation": { "speed": 1.8 },
+            "pulse":    { "speed": 2.5, "amplitude": 0.1 },
+            "opacity":  { "from": 0.4, "to": 1.0, "speed": 2.0 }
+        },
+
+        "cellEmpty": {
+            "pulse": { "speed": 0.4, "amplitude": 0.015 },
+            "js":    "const t = Date.now()/2000; ctx.globalAlpha = 0.6 + Math.sin(t*3.14)*0.2;"
+        },
+
+        "cellFilled": {
+            "pulse": { "speed": 1.5, "amplitude": 0.07 },
+            "js":    "const t = Date.now()/300; ctx.rotate(Math.sin(t)*0.4); ctx.scale(1 + Math.sin(t*2)*0.1, 1 + Math.sin(t*2)*0.1);"
+        },
+
+        "figureCircle": {
+            "float": { "speed": 0.4, "amplitude": 3 },
+            "js":    "const t = Date.now()/700; ctx.scale(1 + Math.sin(t*1.2)*0.08, 1 + Math.sin(t*1.2)*0.08);"
+        },
+
+        "figureDiamond": {
+            "rotation": { "speed": 0.2 },
+            "sway":     { "speed": 0.4, "amplitude": 3 }
+        },
+
+        "figureSquare": {
+            "rotation": { "speed": 0.35 },
+            "pulse":    { "speed": 0.9, "amplitude": 0.06 }
+        },
+
+        "figureTriangle": {
+            "js": "const t = Date.now()/500; ctx.rotate(Math.sin(t*1.5)*0.5); ctx.translate(Math.sin(t)*2, 0);"
+        },
+
+        "figurePolyhedron": {
+            "rotation": { "speed": -0.15 },
+            "float":    { "speed": 0.35, "amplitude": 2 },
+            "js":       "const t = Date.now()/900; ctx.scale(1 + Math.sin(t*1.8)*0.12, 1 - Math.sin(t*1.8)*0.12);"
+        },
+
+        "exchanger": {
+            "rotation": { "speed": 0.25 },
+            "js":       "const t = Date.now()/600; ctx.globalAlpha = 0.75 + Math.sin(t*3)*0.25;"
+        }
+    },
+
+    "params": {
+        "itemsCount": 4,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["TRIANGLE", "POLYHEDRON"]
+    }
+}

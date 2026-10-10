@@ -1,0 +1,44 @@
+{
+    "id": 5,
+    "name": "Garden — сад",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#1a2a10",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+"svg": {
+    "world": "<svg><circle cx='0' cy='0' r='120' fill='#2a4a20' opacity='0.4'/><circle cx='0' cy='0' r='90' fill='#3a5a30' opacity='0.5'/><circle cx='0' cy='0' r='60' fill='#4a6a40' opacity='0.6'/><circle cx='0' cy='0' r='35' fill='#6a8a50' opacity='0.7'/><circle cx='0' cy='0' r='15' fill='#a0c080' opacity='0.9'/></svg>",
+
+    "portalClosed":       "<svg><circle cx='0' cy='0' r='28' fill='#1a3010' stroke='#5a8a40' stroke-width='2'/></svg>",
+    "portalOpenPast":     "<svg><circle cx='0' cy='0' r='28' fill='#1a3010' stroke='#80d0ff' stroke-width='3'/></svg>",
+    "portalOpenFuture":   "<svg><circle cx='0' cy='0' r='28' fill='#1a3010' stroke='#a0ff90' stroke-width='3'/></svg>",
+    "portalOpenParallel": "<svg><circle cx='0' cy='0' r='28' fill='#1a3010' stroke='#c090ff' stroke-width='3'/></svg>",
+    "portalOpenAnomaly":  "<svg><circle cx='0' cy='0' r='28' fill='#301810' stroke='#ff8060' stroke-width='3'/></svg>",
+
+    "cellEmpty":  "<svg><circle cx='0' cy='0' r='13' fill='#2a1a10' stroke='#5a8a40' stroke-width='2'/></svg>",
+    "cellFilled": "<svg><circle cx='0' cy='0' r='13' fill='#3a2a18' stroke='#a0d080' stroke-width='2.5'/></svg>",
+
+    "figureCircle":     "<svg><circle cx='0' cy='0' r='14' fill='#e04040' stroke='#802020' stroke-width='2'/><ellipse cx='-4' cy='-3' rx='3' ry='4' fill='#ffc0c0' opacity='0.9'/><path d='M 0,-14 Q 3,-18 7,-16' stroke='#2a6020' stroke-width='2.5' fill='none'/><circle cx='9' cy='-17' r='2.5' fill='#50a040'/></svg>",
+
+    "figureDiamond":    "<svg><ellipse cx='0' cy='0' rx='12' ry='15' fill='#b0e040' stroke='#508020' stroke-width='2'/><ellipse cx='-4' cy='-4' rx='3' ry='5' fill='#e0ffa0' opacity='0.9'/><path d='M 0,-15 L 2,-22 L 6,-20' stroke='#2a4010' stroke-width='2.5' fill='none'/><circle cx='7' cy='-21' r='2.5' fill='#50a040'/></svg>",
+
+    "figureSquare":     "<svg><ellipse cx='0' cy='0' rx='13' ry='11' fill='#a060c0' stroke='#401060' stroke-width='2'/><ellipse cx='-3' cy='-3' rx='3' ry='2' fill='#e0b0ff' opacity='0.9'/><path d='M 0,-11 L -2,-16' stroke='#401060' stroke-width='2'/></svg>",
+
+    "figureTriangle":   "<svg><path d='M -10,-12 Q 0,-20 10,-12 Q 8,4 0,14 Q -8,4 -10,-12 Z' fill='#ffe040' stroke='#a08020' stroke-width='2'/><path d='M -6,-10 Q 0,-14 6,-10' stroke='#d0a020' stroke-width='1.5' fill='none' opacity='0.8'/></svg>",
+
+    "figurePolyhedron": "<svg><circle cx='0' cy='0' r='6' fill='#e02040' stroke='#600020' stroke-width='1.5'/><path d='M 0,-6 Q -2,-14 -6,-16' stroke='#3a2010' stroke-width='2' fill='none'/><path d='M 0,-6 Q 2,-14 6,-16' stroke='#3a2010' stroke-width='2' fill='none'/><circle cx='-7' cy='-17' r='2.5' fill='#e02040'/><circle cx='7' cy='-17' r='2.5' fill='#e02040'/></svg>",
+
+    "exchanger": "<svg><circle cx='0' cy='0' r='24' fill='none' stroke='#a0d080' stroke-width='3'/><circle cx='0' cy='0' r='18' fill='#1a3010'/></svg>"
+},
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}

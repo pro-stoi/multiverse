@@ -1,0 +1,100 @@
+{
+    "id": 1,
+    "name": "Glass — стеклянный лабиринт",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#0a1a2a",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><polygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='#1a3a5a' opacity='0.4'/><polygon points='0,-80 70,-40 70,40 0,80 -70,40 -70,-40' fill='#2a5a8a' opacity='0.5'/><polygon points='0,-50 45,-25 45,25 0,50 -45,25 -45,-25' fill='#4a90c0' opacity='0.6'/><circle cx='0' cy='0' r='20' fill='#a0e0ff' opacity='0.8'/></svg>",
+
+        "portalClosed":       "<svg><polygon points='0,-28 24,-14 24,14 0,28 -24,14 -24,-14' fill='#0a1a2a' stroke='#6a9ac0' stroke-width='2.5'/></svg>",
+        "portalOpenPast":     "<svg><polygon points='0,-28 24,-14 24,14 0,28 -24,14 -24,-14' fill='#0a2030' stroke='#80d0ff' stroke-width='3'/><circle cx='0' cy='0' r='8' fill='#80d0ff' opacity='0.6'/></svg>",
+        "portalOpenFuture":   "<svg><polygon points='0,-28 24,-14 24,14 0,28 -24,14 -24,-14' fill='#0a2030' stroke='#ffd060' stroke-width='3'/><circle cx='0' cy='0' r='8' fill='#ffd060' opacity='0.6'/></svg>",
+        "portalOpenParallel": "<svg><polygon points='0,-28 24,-14 24,14 0,28 -24,14 -24,-14' fill='#0a2030' stroke='#c090ff' stroke-width='3'/><circle cx='0' cy='0' r='8' fill='#c090ff' opacity='0.6'/></svg>",
+        "portalOpenAnomaly":  "<svg><polygon points='0,-28 24,-14 24,14 0,28 -24,14 -24,-14' fill='#200a20' stroke='#ff40a0' stroke-width='3'/><circle cx='0' cy='0' r='8' fill='#ff40a0' opacity='0.6'/></svg>",
+
+        "cellEmpty":  "<svg><polygon points='0,-14 12,-7 12,7 0,14 -12,7 -12,-7' fill='#1a3a5a' stroke='#80b8e0' stroke-width='2.5'/><circle cx='0' cy='0' r='4' fill='none' stroke='#80b8e0' stroke-width='1.5' opacity='0.6'/></svg>",
+        "cellFilled": "<svg><polygon points='0,-14 12,-7 12,7 0,14 -12,7 -12,-7' fill='#4080c0' stroke='#c0e8ff' stroke-width='3'/><circle cx='0' cy='0' r='4' fill='#ffffff'/></svg>",
+
+        "figureCircle":     "<svg><circle cx='0' cy='0' r='15' fill='#80c0f0' stroke='#c0e8ff' stroke-width='2.5'/><circle cx='-4' cy='-4' r='4' fill='#ffffff' opacity='0.8'/></svg>",
+        "figureDiamond":    "<svg><polygon points='0,-16 12,0 0,16 -12,0' fill='#a0d8ff' stroke='#e0f4ff' stroke-width='2.5'/><polygon points='0,-8 5,0 0,8 -5,0' fill='#ffffff' opacity='0.9'/></svg>",
+        "figureSquare":     "<svg><rect x='-12' y='-12' width='24' height='24' rx='3' fill='#6090c0' stroke='#c0e0ff' stroke-width='2.5'/><circle cx='0' cy='0' r='4' fill='#ffffff'/></svg>",
+        "figureTriangle":   "<svg><polygon points='0,-16 14,10 -14,10' fill='#80b0e0' stroke='#d0f0ff' stroke-width='2.5'/><circle cx='0' cy='2' r='3' fill='#ffffff'/></svg>",
+        "figurePolyhedron": "<svg><polygon points='0,-16 14,-5 9,13 -9,13 -14,-5' fill='#5080b0' stroke='#b0e0ff' stroke-width='2.5'/><circle cx='0' cy='-2' r='3' fill='#ffffff'/></svg>",
+
+        "exchanger": "<svg><polygon points='0,-26 22,-13 22,13 0,26 -22,13 -22,-13' fill='none' stroke='#80b8e0' stroke-width='3'/><circle cx='0' cy='0' r='16' fill='#0a1a2a'/></svg>"
+    },
+
+    "animations": {
+        "world": {
+            "pulse": { "speed": 0.08, "amplitude": 0.02 },
+            "js":    "const t = Date.now()/4000; ctx.rotate(t); ctx.scale(1 + Math.sin(t*2)*0.02, 1 + Math.sin(t*2)*0.02);"
+        },
+        "portalClosed": {
+            "pulse": { "speed": 0.3, "amplitude": 0.02 }
+        },
+        "portalOpenPast": {
+            "rotation": { "speed": 0.25 },
+            "pulse":    { "speed": 0.6, "amplitude": 0.04 },
+            "js":       "const t = Date.now()/1000; ctx.globalAlpha = 0.7 + Math.sin(t*1.2)*0.3;"
+        },
+        "portalOpenFuture": {
+            "rotation": { "speed": -0.2 },
+            "pulse":    { "speed": 0.5, "amplitude": 0.04 }
+        },
+        "portalOpenParallel": {
+            "rotation": { "speed": 0.4 },
+            "pulse":    { "speed": 0.9, "amplitude": 0.06 }
+        },
+        "portalOpenAnomaly": {
+            "rotation": { "speed": 1.2 },
+            "pulse":    { "speed": 2.4, "amplitude": 0.1 },
+            "opacity":  { "from": 0.4, "to": 1.0, "speed": 1.8 }
+        },
+        "cellEmpty": {
+            "pulse": { "speed": 0.2, "amplitude": 0.015 }
+        },
+        "cellFilled": {
+            "pulse": { "speed": 0.7, "amplitude": 0.04 },
+            "js":    "const t = Date.now()/600; ctx.rotate(Math.sin(t)*0.3);"
+        },
+        "figureCircle": {
+            "float": { "speed": 0.35, "amplitude": 3 },
+            "js":    "const t = Date.now()/800; ctx.scale(1 + Math.sin(t)*0.08, 1 + Math.sin(t)*0.08);"
+        },
+        "figureDiamond": {
+            "sway":     { "speed": 0.4, "amplitude": 4 },
+            "rotation": { "speed": 0.15 }
+        },
+        "figureSquare": {
+            "rotation": { "speed": 0.3 },
+            "pulse":    { "speed": 0.6, "amplitude": 0.05 }
+        },
+        "figureTriangle": {
+            "sway": { "speed": 0.5, "amplitude": 3 },
+            "js":   "const t = Date.now()/1000; ctx.rotate(Math.sin(t*1.5)*0.4);"
+        },
+        "figurePolyhedron": {
+            "rotation": { "speed": -0.18 },
+            "float":    { "speed": 0.3, "amplitude": 2 },
+            "js":       "const t = Date.now()/1200; ctx.scale(1 + Math.sin(t*1.8)*0.1, 1 - Math.sin(t*1.8)*0.1);"
+        },
+        "exchanger": {
+            "rotation": { "speed": 0.2 },
+            "pulse":    { "speed": 0.4, "amplitude": 0.03 }
+        }
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}

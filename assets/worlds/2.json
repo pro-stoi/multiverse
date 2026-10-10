@@ -1,0 +1,113 @@
+{
+    "id": 2,
+    "name": "Rust — ржавый завод",
+    "era": { "from": 0, "to": 9999 },
+    "background": "#1a0f08",
+
+    "layout": {
+        "world":     { "rule": "radial", "cx": 0.5, "cy": 0.55, "radius": 0.22 },
+        "portals":   { "rule": "radial", "radius": 1.30, "startAngle": -1.5708 },
+        "cells":     { "rule": "radial-around-portal", "radius": 54, "startAngle": -1.5708 },
+        "exchanger": { "rule": "radial", "radius": 0.65, "angle": 1.5708 }
+    },
+
+    "svg": {
+        "world": "<svg><polygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='#4a2810' opacity='0.5'/><polygon points='0,-80 70,-40 70,40 0,80 -70,40 -70,-40' fill='#6a3a18' opacity='0.5'/><polygon points='0,-50 45,-25 45,25 0,50 -45,25 -45,-25' fill='#a06030' opacity='0.6'/><circle cx='0' cy='0' r='20' fill='#ffb060' opacity='0.8'/><circle cx='-60' cy='-60' r='6' fill='#ff6020' opacity='0.3'/><circle cx='70' cy='-40' r='5' fill='#ffa040' opacity='0.35'/><circle cx='-50' cy='70' r='4' fill='#ff8020' opacity='0.3'/><circle cx='60' cy='60' r='7' fill='#ffb060' opacity='0.25'/></svg>",
+
+        "portalClosed":       "<svg><rect x='-24' y='-16' width='48' height='32' rx='3' fill='#1a0f08' stroke='#a06030' stroke-width='2.5'/></svg>",
+        "portalOpenPast":     "<svg><rect x='-24' y='-16' width='48' height='32' rx='3' fill='#1a0f08' stroke='#80d0ff' stroke-width='3'/><rect x='-18' y='-10' width='36' height='20' rx='2' fill='#80d0ff' opacity='0.3'/></svg>",
+        "portalOpenFuture":   "<svg><rect x='-24' y='-16' width='48' height='32' rx='3' fill='#1a0f08' stroke='#ffd060' stroke-width='3'/><rect x='-18' y='-10' width='36' height='20' rx='2' fill='#ffd060' opacity='0.3'/></svg>",
+        "portalOpenParallel": "<svg><rect x='-24' y='-16' width='48' height='32' rx='3' fill='#1a0f08' stroke='#c090ff' stroke-width='3'/><rect x='-18' y='-10' width='36' height='20' rx='2' fill='#c090ff' opacity='0.3'/></svg>",
+        "portalOpenAnomaly":  "<svg><rect x='-24' y='-16' width='48' height='32' rx='3' fill='#200f08' stroke='#ff4080' stroke-width='3'/><rect x='-18' y='-10' width='36' height='20' rx='2' fill='#ff4080' opacity='0.4'/></svg>",
+
+        "cellEmpty":  "<svg><rect x='-12' y='-12' width='24' height='24' rx='3' fill='#2a1810' stroke='#a06030' stroke-width='2.5'/><rect x='-6' y='-6' width='12' height='12' rx='2' fill='none' stroke='#a06030' stroke-width='1.5' opacity='0.5'/></svg>",
+        "cellFilled": "<svg><rect x='-12' y='-12' width='24' height='24' rx='3' fill='#6a3a18' stroke='#ffb060' stroke-width='3'/><circle cx='0' cy='0' r='4' fill='#ffe0a0'/><circle cx='0' cy='0' r='8' fill='#ffb060' opacity='0.25'/></svg>",
+
+        "figureCircle":     "<svg><circle cx='0' cy='0' r='15' fill='#a06030' stroke='#ffd090' stroke-width='2.5'/><circle cx='-4' cy='-4' r='4' fill='#ffe0a0' opacity='0.8'/></svg>",
+        "figureDiamond":    "<svg><polygon points='0,-16 12,0 0,16 -12,0' fill='#c08040' stroke='#ffd0a0' stroke-width='2.5'/><polygon points='0,-8 5,0 0,8 -5,0' fill='#ffe8c0' opacity='0.8'/></svg>",
+        "figureSquare":     "<svg><rect x='-12' y='-12' width='24' height='24' rx='3' fill='#804820' stroke='#ffb060' stroke-width='2.5'/><circle cx='0' cy='0' r='4' fill='#ffe0a0'/></svg>",
+        "figureTriangle":   "<svg><polygon points='0,-16 14,10 -14,10' fill='#a05828' stroke='#ffc080' stroke-width='2.5'/><circle cx='0' cy='2' r='3' fill='#ffe8c0'/></svg>",
+        "figurePolyhedron": "<svg><polygon points='0,-16 14,-5 9,13 -9,13 -14,-5' fill='#6a3a18' stroke='#ffa060' stroke-width='2.5'/><circle cx='0' cy='-2' r='3' fill='#ffe0a0'/></svg>",
+
+        "exchanger": "<svg><rect x='-24' y='-24' width='48' height='48' rx='4' fill='none' stroke='#ffb060' stroke-width='3'/><circle cx='0' cy='0' r='16' fill='#1a0f08'/><circle cx='0' cy='0' r='8' fill='#ff6020' opacity='0.4'/></svg>"
+    },
+
+    "animations": {
+        "world": {
+            "pulse": { "speed": 0.15, "amplitude": 0.02 },
+            "js": "const t = Date.now()/1000; ctx.translate(Math.sin(t*0.7)*3, Math.cos(t*0.9)*2);"
+        },
+
+        "portalClosed": {
+            "pulse": { "speed": 0.4, "amplitude": 0.02 },
+            "sway":  { "speed": 0.6, "amplitude": 1 }
+        },
+
+        "portalOpenPast": {
+            "pulse": { "speed": 0.8, "amplitude": 0.04 },
+            "js": "const t = Date.now()/800; ctx.globalAlpha = 0.6 + Math.sin(t*2)*0.4;"
+        },
+
+        "portalOpenFuture": {
+            "pulse":    { "speed": 1.2, "amplitude": 0.06 },
+            "rotation": { "speed": 0.15 },
+            "js":       "const t = Date.now()/300; const s = 1 + Math.sin(t)*0.08; ctx.scale(s, s); ctx.globalAlpha = 0.7 + Math.sin(t*3)*0.3;"
+        },
+
+        "portalOpenParallel": {
+            "pulse": { "speed": 1.5, "amplitude": 0.08 },
+            "js":    "const t = Date.now()/600; ctx.rotate(Math.sin(t)*0.15); ctx.globalAlpha = 0.65 + Math.sin(t*2.5)*0.35;"
+        },
+
+        "portalOpenAnomaly": {
+            "pulse":    { "speed": 3, "amplitude": 0.12 },
+            "rotation": { "speed": 1.5 },
+            "opacity":  { "from": 0.4, "to": 1.0, "speed": 2.5 }
+        },
+
+        "cellEmpty": {
+            "pulse": { "speed": 0.5, "amplitude": 0.02 },
+            "js":    "const t = Date.now()/2500; ctx.globalAlpha = 0.5 + Math.sin(t*3.14)*0.15;"
+        },
+
+        "cellFilled": {
+            "pulse": { "speed": 1.2, "amplitude": 0.06 },
+            "js":    "const t = Date.now()/400; ctx.globalAlpha = 0.75 + Math.sin(t*4)*0.25; const s = 1 + Math.sin(t*2)*0.1; ctx.scale(s, s);"
+        },
+
+        "figureCircle": {
+            "float": { "speed": 0.3, "amplitude": 3 },
+            "js":    "const t = Date.now()/900; ctx.rotate(Math.sin(t)*0.2);"
+        },
+
+        "figureDiamond": {
+            "rotation": { "speed": 0.1 },
+            "js":       "const t = Date.now()/500; ctx.scale(1 + Math.sin(t)*0.05, 1 - Math.sin(t)*0.05);"
+        },
+
+        "figureSquare": {
+            "js": "const t = Date.now()/120; ctx.translate(Math.sin(t*3)*0.6, Math.cos(t*2.7)*0.6); ctx.rotate(Math.sin(t*1.5)*0.03);"
+        },
+
+        "figureTriangle": {
+            "sway": { "speed": 0.6, "amplitude": 3 },
+            "js":   "const t = Date.now()/700; ctx.rotate(Math.sin(t*1.2)*0.25);"
+        },
+
+        "figurePolyhedron": {
+            "rotation": { "speed": -0.12 },
+            "js":       "const t = Date.now()/1100; ctx.scale(1 + Math.sin(t*1.8)*0.08, 1 - Math.sin(t*1.8)*0.08);"
+        },
+
+        "exchanger": {
+            "rotation": { "speed": 0.15 },
+            "js": "const t = Date.now()/500; ctx.globalAlpha = 0.7 + Math.sin(t*3)*0.3;"
+        }
+    },
+
+    "params": {
+        "itemsCount": 3,
+        "maxItemsOnField": 6,
+        "allowedShapes": ["CIRCLE", "DIAMOND"]
+    }
+}
