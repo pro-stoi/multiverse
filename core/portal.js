@@ -116,21 +116,6 @@ canPlaceInCell(cellIndex, figure) {
         if (this.kind === PortalKind.TIME_PAST) return 'past:' + Math.abs(this.deltaTime);
         return 'future:' + Math.abs(this.deltaTime);
     }
-    // Можно ли положить фигуру в конкретную ячейку?
-// (проверка: не дублирует ли форму из других ячеек)
-canPlaceInCell(cellIndex, figure) {
-    if (!figure) return false;
+   
 
-    // Для временных порталов — любую можно
-    if (this.kind !== 'PARALLEL') return true;
-
-    // Для параллельных — только уникальные формы
-    const ci = cellIndex;
-    for (let i = 0; i < this.cells.length; i++) {
-        if (i === ci) continue;
-        const f = this.cells[i].figure;
-        if (f && f.shape === figure.shape) return false;
-    }
-    return true;
-}
 }
