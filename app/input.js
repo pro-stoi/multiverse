@@ -104,22 +104,28 @@ async function maybeSwapWorld() {
         }
     }
 
-    function pickCellFigure(packed) {
-        const node = player.currentNode;
-        const pi = Math.floor(packed / 100);
-        const ci = packed % 100;
-        const portal = node.portals[pi];
-        if (!portal) return;
-        const cell = portal.cells[ci];
-        if (!cell || !cell.figure) return;
-      if (player.addFigure(cell.figure)) {
+function pickCellFigure(packed) {
+    const node = player.currentNode;
+    const pi = Math.floor(packed / 100);
+    const ci = packed % 100;
+    const portal = node.portals[pi];
+    if (!portal) return;
+    const cell = portal.cells[ci];
+    if (!cell || !cell.figure) return;
+
+    if (player.addFigure(cell.figure)) {
+        // Если портал был открыт — снимаем регистрацию комбинации
+        if (portal.isOpen()) {
+            const combo = portal.cells.map(c => c.figure);
+            world.unregisterCombo(node.branchId, combo);
+        }
         cell.figure = null;
         portal.refreshState();
         state.statusText = 'Забрал из ячейки';
     } else {
-            state.statusText = 'Инвентарь полон';
-        }
+        state.statusText = 'Инвентарь полон';
     }
+}
 
     function handleTap(x, y, now) {
         const hit = hits.findAt(x, y);
@@ -146,6 +152,15 @@ async function maybeSwapWorld() {
             }
             world.tickUserTime(player, false);
             state.statusText = 'Год +1 (t=' + player.currentNode.timeAnchor + ')';
+            lastTapId = null;
+            return;
+        }
+
+                if (hit.kind === 'TUTORIAL') {
+            const tutorial = state.currentWorldSpec.getTutorial
+                ? state.currentWorldSpec.getTutorial()
+                : null;
+            if (tutorial) tutorial.toggle();
             lastTapId = null;
             return;
         }
