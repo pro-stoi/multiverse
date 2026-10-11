@@ -26,19 +26,25 @@ export function setupDragDrop({ world, player, hits, state, canvas }) {
             drag.source = { kind: 'FIELD', index: hit.index };
             drag.offsetX = f._px != null ? f._px - x : 0;
             drag.offsetY = f._py != null ? f._py - y : 0;
-        } else if (hit.kind === HitKind.PORTAL_CELL) {
-            const pi = Math.floor(hit.index / 100);
-            const ci = hit.index % 100;
-            const portal = node.portals[pi];
-            if (!portal) return;
-            const cell = portal.cells[ci];
-            if (!cell || !cell.figure) return;
+     } else if (hit.kind === HitKind.PORTAL_CELL) {
+    const pi = Math.floor(hit.index / 100);
+    const ci = hit.index % 100;
+    const portal = node.portals[pi];
+    if (!portal) return;
+    const cell = portal.cells[ci];
+    if (!cell || !cell.figure) return;
 
-            drag.figure = cell.figure;
-            drag.source = { kind: 'CELL', index: hit.index };
-            cell.figure = null;
-            portal.refreshState();
-        } else if (hit.kind === HitKind.SLOT) {
+    // Если портал был открыт — снимаем регистрацию комбинации
+    if (portal.isOpen()) {
+        const combo = portal.cells.map(c => c.figure);
+        world.unregisterCombo(node.branchId, combo);
+    }
+
+    drag.figure = cell.figure;
+    drag.source = { kind: 'CELL', index: hit.index };
+    cell.figure = null;
+    portal.refreshState();
+} else if (hit.kind === HitKind.SLOT) {
             const s = player.slots[hit.index];
             if (!s || s.isEmpty()) return;
             const f = player.takeOneFromSlot(hit.index);
@@ -110,6 +116,8 @@ export function setupDragDrop({ world, player, hits, state, canvas }) {
         }
 
         // PORTAL_CELL
+// PORTAL_CELL
+// PORTAL_CELL
 if (hit && hit.kind === HitKind.PORTAL_CELL) {
     const pi = Math.floor(hit.index / 100);
     const ci = hit.index % 100;
@@ -124,7 +132,7 @@ if (hit && hit.kind === HitKind.PORTAL_CELL) {
         return;
     }
 
-    // Для параллельных — проверка уникальности формы
+    // Для параллельных — проверка уникальности формы внутри портала
     if (!portal.canPlaceInCell(ci, drag.figure)) {
         state.statusText = 'Такая форма уже есть в портале';
         returnToSource();
@@ -132,14 +140,38 @@ if (hit && hit.kind === HitKind.PORTAL_CELL) {
         return;
     }
 
+    // Собираем будущий набор фигур (текущие + новая)
+    const futureFigures = [];
+    for (let i = 0; i < portal.cells.length; i++) {
+        if (i === ci) futureFigures.push(drag.figure);
+        else          futureFigures.push(portal.cells[i].figure);
+    }
+
+    // Если после постановки портал станет полным — проверяем комбинацию
+    const willBeFull = futureFigures.every(f => f != null);
+    if (willBeFull) {
+        if (!world.isComboAvailable(node.branchId, futureFigures)) {
+            state.statusText = 'Такая комбинация уже собрана в этой ветке';
+            returnToSource();
+            end();
+            return;
+        }
+    }
+
     // Ставим фигуру
     cell.figure = drag.figure;
     drag.figure.location = 'PORTAL_CELL';
-
-    // Обновляем состояние портала
     portal.refreshState();
 
-    state.statusText = 'В ячейку портала (' + portal.filledCells() + '/5)';
+    // Если портал открылся — регистрируем комбинацию
+    if (portal.isOpen()) {
+        const combo = portal.cells.map(c => c.figure);
+        world.registerCombo(node.branchId, combo);
+        state.statusText = 'Портал открыт!';
+    } else {
+        state.statusText = 'В ячейку портала (' + portal.filledCells() + '/5)';
+    }
+
     end();
     return;
 }
@@ -168,16 +200,22 @@ if (hit && hit.kind === HitKind.PORTAL_CELL) {
         const node = player.currentNode;
         if (drag.source.kind === 'FIELD') {
             // ничего
-        } else if (drag.source.kind === 'CELL') {
-            const pi = Math.floor(drag.source.index / 100);
-            const ci = drag.source.index % 100;
-            const portal = node.portals[pi];
-            if (portal) {
-                portal.cells[ci].figure = drag.figure;
-                drag.figure.location = 'PORTAL_CELL';
-                portal.refreshState();
-            }
-        } else if (drag.source.kind === 'SLOT') {
+    } else if (drag.source.kind === 'CELL') {
+    const pi = Math.floor(drag.source.index / 100);
+    const ci = drag.source.index % 100;
+    const portal = node.portals[pi];
+    if (portal) {
+        portal.cells[ci].figure = drag.figure;
+        drag.figure.location = 'PORTAL_CELL';
+        portal.refreshState();
+
+        // Если портал снова открылся — возвращаем комбинацию в регистр
+        if (portal.isOpen()) {
+            const combo = portal.cells.map(c => c.figure);
+            world.registerCombo(node.branchId, combo);
+        }
+    }
+} else if (drag.source.kind === 'SLOT') {
             player.addFigure(drag.figure);
         }
     }
