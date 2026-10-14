@@ -61,18 +61,7 @@ refreshState() {
 
 // Можно ли положить фигуру в конкретную ячейку?
 canPlaceInCell(cellIndex, figure) {
-    if (!figure) return false;
-
-    // Для временных — любую можно
-    if (this.kind !== 'PARALLEL') return true;
-
-    // Для параллельных — только уникальные формы
-    for (let i = 0; i < this.cells.length; i++) {
-        if (i === cellIndex) continue;
-        const f = this.cells[i].figure;
-        if (f && f.shape === figure.shape) return false;
-    }
-    return true;
+    return figure != null;
 }
 
     isOpen() {
