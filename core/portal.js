@@ -56,24 +56,7 @@ export class Portal {
     }
 
 refreshState() {
-    if (this.filledCells() !== CELLS) {
-        this.state = 'closed';
-        return;
-    }
-
-    // Для временных порталов — 5 любых фигур
-    if (this.kind !== 'PARALLEL') {
-        this.state = 'open';
-        return;
-    }
-
-    // Для параллельных — 5 РАЗНЫХ
-    const shapes = new Set();
-    for (const c of this.cells) {
-        if (!c.figure) { this.state = 'closed'; return; }
-        shapes.add(c.figure.shape);
-    }
-    this.state = shapes.size === CELLS ? 'open' : 'closed';
+    this.state = this.filledCells() === CELLS ? 'open' : 'closed';
 }
 
 // Можно ли положить фигуру в конкретную ячейку?
