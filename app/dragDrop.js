@@ -132,13 +132,6 @@ if (hit && hit.kind === HitKind.PORTAL_CELL) {
         return;
     }
 
-    // Для параллельных — проверка уникальности формы внутри портала
-    if (!portal.canPlaceInCell(ci, drag.figure)) {
-        state.statusText = 'Такая форма уже есть в портале';
-        returnToSource();
-        end();
-        return;
-    }
 
     // Собираем будущий набор фигур (текущие + новая)
     const futureFigures = [];
